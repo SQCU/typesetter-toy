@@ -1,20 +1,13 @@
 window.onload = function() {
 /*	2020-08-31
 	Exciting typing error fixed after all these days.  I can hardly believe it myself.
-		[ ]Handle out of range characters ()_+,.<>/?:";'[]{} etc.  map fullstop to 水?
-		[ ]Handle extreme bizarro characters that i could not predict e.g. yurokeyboard examples?
-			-input.split('')	//returns array of all chars in list
-			-charMap.has(character)  // returns true / false
-			-array.reduce(callback(), []).foreach();
-			callback(accum, curr){
-				if(charMap.has(curr)){	//if a missing map value is repeated in the input only adds once
-					continue;
-				}
-				else{
-					accum.push(curr);  //ought to be a list of unique not yet present chars
-				}
-			}
+		[X]Handle out of range characters ()_+,.<>/?:";'[]{} etc.  map fullstop to 水?
+		[X]Handle extreme bizarro characters that i could not predict e.g. yurokeyboard examples?
+	2020-09-01
+		[X]Pruned excess comments
+		[X]Populated remote repo
 */
+
 //instantiate necessary 2d graphics shit
 var canban = document.getElementById("yonCanvas");
 var contex = canban.getContext("2d");
@@ -22,7 +15,6 @@ var sheet = document.getElementById("hivis");
 var canWidth = canban.width;
 var canHeight = canban.height;
 
-//var frame = {img:sheet, sx:0, sy:0, swidth:32, sheight:32, xpos:100, ypos:100}; //A is for A
 function Frame(img, sx, sy, swidth, sheight) {
 this.img = img;
 this.sx = sx;
@@ -109,67 +101,15 @@ console.log("Space plotted at "+coords.xpos/whitespace+" Ms of text"); //stinky 
 
 }  //holy shit will this even work
 
-//prints ASSWAD
+//print ASSWAD
 const coordsA = new Coords(100, 0);
 console.log(coordsA.xpos+","+coordsA.ypos); //you know how it is
 typesetter(".ASSWAD.", coordsA);
 
 let asswadPrime = new Coords(50, 64);
-//typesetter("ASSWAD II THE SEQUEL TO ASSWAD COMING TO THEATERS THIS SUMMER TWENTY TWELVE", asswadPrime);
-//let input = "good luck no clue what Im looking at there"
+//debug string containing invalid characters
 let input = "i am absolutely ,./<>🤢🤢🤢🤢?STYMIED by the dynamic typing that allowed my early mistake to go unnoticed for such a long period of time";
 console.log("requested: "+input);
 typesetter(input, asswadPrime);
 console.log("printed: "+input+".");
 }; //end of onload function
-
-
-
-/*	t. cadillion 2020-08-28
-const toCopy = Object.entries(obj2);
-toCopy.forEach(function (pair) {  
-const key = pair[0];
-const value = pair[1];
-obj1[key] = value; // merges objects, obj2 overwrites  
-obj1.key[key] = value; // inserts copy of object at obj1.key
-  });
-*/
-
-/*"I use it for everything so I don't have to walk arrays all the time e.g.:" t. cadillion
-array.filter(filterFunction).map(mapFunction);
-
-array.reduce((accumulator, current) => {
-	if (filterfunction(current)) return [...accumulator, mapFunction(current)];
-	else return accumulator;
-	},
-	[]
-);
-
-/*
-
-/*charsheet from range 0-32,0-32 inserted at coords 100,100
-//prints ASSWAD
-contex.drawImage(sheet, 0, 0, 32, 32, 100, 100, 32, 32);
-contex.drawImage(sheet, 160, 32, 32, 32, 132, 100, 32, 32);
-contex.drawImage(sheet, 160, 32, 32, 32, 164, 100, 32, 32);
-contex.drawImage(sheet, 288, 32, 32, 32, 196, 100, 32, 32);
-contex.drawImage(sheet, 0, 0, 32, 32, 228, 100, 32, 32);
-contex.drawImage(sheet, 96, 0, 32, 32, 260, 100, 32, 32);
-*/
-/* commented out line plotting codeo
-//contex.strokeStyle = "#E1A034";
-//contex.moveTo(0,0);
-//contex.lineTo(320, 320);
-//contex.lineTo(480, 320);  //BRUH THIS ONE RUNS FROM 320,320 TO 320,480
-//contex.lineTo(0, 0); 
-//contex.stroke();
-*/
-/* commented out .drawImage function reference
-	context.drawImage(img,sx,sy,swidth,sheight,x,y, width, height)
-		img does what youd expect
-		sx, sy are the coords in the base image where you start to clippity clip
-		swidth, sheight are the lengths that are clipped from img
-		x,y are the coords where the image is pasted in your canvas
-		width, height are the scale the image will be pasted in at. MANDATORY.
-	Let's guess: is the image placed so that the top left corner is drawn on x,y?
-*/
