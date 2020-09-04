@@ -6,6 +6,10 @@ window.onload = function() {
 	2020-09-01
 		[X]Pruned excess comments
 		[X]Populated remote repo
+	2020-09-04
+		[X]revised out of date comments
+		[X]fixed execution order error
+		[ ]Interactive
 */
 
 //instantiate necessary 2d graphics shit
@@ -29,7 +33,6 @@ function Coords(xpos, ypos){ //I feel most comfortable storing game data in a di
 this.xpos = xpos;
 this.ypos = ypos;
 }
-
 
 //constants brapped here
 //map pairing "letter" to "spritesheet coordinates and scale"
@@ -73,15 +76,16 @@ input.toUpperCase().split('').reduce(( accum, curr ) =>{
 });
 }
 
-function draw(frame, coords) { //pass frame data and also the html5 canvas context so it can be drawn on
+function draw(frame, coords) { //pass frame data.
 contex.drawImage(frame.img, frame.sx, frame.sy, frame.swidth, frame.sheight, coords.xpos, coords.ypos, frame.swidth, frame.sheight);
 //console.log("drawn at "+coords.xpos+","+coords.ypos+".");
 }
 
+//typesetter is the function we call to draw things,
 function typesetter(string, coords){	//ok so like, why the fuck does it newline after each word? why? [HISTORIC COMMENT DO NOT REMOVE]
-inputValidation(string);
-let whitespace = charMap.get("A").swidth;
 string = string.toUpperCase();
+inputValidation(string);
+let whitespace = charMap.get("A").swidth;	//probably a better way to do this
 string.split(' ').forEach(word => {
 	word.split('').forEach(letter => {
 	let frameWidth = charMap.get(letter).swidth;
@@ -101,15 +105,15 @@ console.log("Space plotted at "+coords.xpos/whitespace+" Ms of text"); //stinky 
 
 }  //holy shit will this even work
 
-//print ASSWAD
+//print too rude for g*thub
 const coordsA = new Coords(100, 0);
 console.log(coordsA.xpos+","+coordsA.ypos); //you know how it is
-typesetter(".ASSWAD.", coordsA);
+typesetter(".QCU", coordsA);
 
-let asswadPrime = new Coords(50, 64);
+let qcuPrime = new Coords(50, 64);	//interactive line is drawn from here to end of canvas
 //debug string containing invalid characters
 let input = "i am absolutely ,./<>🤢🤢🤢🤢?STYMIED by the dynamic typing that allowed my early mistake to go unnoticed for such a long period of time";
 console.log("requested: "+input);
-typesetter(input, asswadPrime);
+typesetter(input, qcuPrime);
 console.log("printed: "+input+".");
 }; //end of onload function
