@@ -9,7 +9,7 @@ window.onload = function() {
 	2020-09-04
 		[X]revised out of date comments
 		[X]fixed execution order error
-		[ ]Interactive
+		[X]Interactive
 */
 
 //instantiate necessary 2d graphics shit
@@ -18,6 +18,7 @@ var contex = canban.getContext("2d");
 var sheet = document.getElementById("hivis"); 
 var canWidth = canban.width;
 var canHeight = canban.height;
+
 
 function Frame(img, sx, sy, swidth, sheight) {
 this.img = img;
@@ -43,6 +44,9 @@ var charMap = new Map();
 const exceptionFrame = new Frame(sheet, 4, 64, 4, 32);
 const schwayFrame = new Frame(sheet, 32, 64, 32, 32);
 
+const coordsA = new Coords(172, 0);		//'title' line for printing centered fixed string 
+const qcuPrime = new Coords(50, 64);	//interactive line is drawn from here to end of canvas
+
 for (let i=0; i<alph.length; i++){	//key:pair of letter:spritesheet coordinates.
 //charMap.set(alph.charAt(i),{sx: (i%13)*frameWidth, sy: Math.floor(i/13)*frameWidth, swidth: frameWidth, sheight: frameWidth});
 const frameWidth = 32;
@@ -50,11 +54,12 @@ charMap.set(alph.charAt(i), new Frame(sheet, (i%13)*frameWidth, Math.floor(i/13)
 }
 charMap.set(".", schwayFrame);	//水 happens here
 
-//so yeah what happens if someone vomits emoji into my beautiful text parser.
-//if they're cool, fullstops are transmuted into gold. literal gold.
-//for everythign else the "exceptionFrame" of a 4px wide visually empty placeholder is sampled from the fontsheet
-//and then added to the character map datatype so that if they call it again it just draws blank yknow so yeah
-//update: this function is honestly kind of disgusting.
+/*	so yeah what happens if someone vomits emoji into my beautiful text parser.
+	if they're cool, fullstops are transmuted into gold. literal gold.
+	for everythign else the "exceptionFrame" of a 4px wide visually empty placeholder is sampled from the fontsheet
+	and then added to the character map datatype so that if they call it again it just draws blank yknow so yeah
+	update: this function is honestly kind of disgusting.
+*/
 function inputValidation(input){	
 input.toUpperCase().split('').reduce(( accum, curr ) =>{
 	if(charMap.has(curr)){	//if a missing map value is repeated in the input only adds once
@@ -82,7 +87,7 @@ contex.drawImage(frame.img, frame.sx, frame.sy, frame.swidth, frame.sheight, coo
 }
 
 //typesetter is the function we call to draw things,
-function typesetter(string, coords){	//ok so like, why the fuck does it newline after each word? why? [HISTORIC COMMENT DO NOT REMOVE]
+function typesetter(string, coords){	//ok so like, why the f*ck does it newline after each word? why? [HISTORIC COMMENT DO NOT REMOVE]
 string = string.toUpperCase();
 inputValidation(string);
 let whitespace = charMap.get("A").swidth;	//probably a better way to do this
@@ -105,15 +110,25 @@ console.log("Space plotted at "+coords.xpos/whitespace+" Ms of text"); //stinky 
 
 }  //holy shit will this even work
 
+//event listener
+document.getElementById("achey").addEventListener("click", acheyTea);
+
+//print contents from form
+function acheyTea(){
+	let input=document.getElementById("formy").value
+	let acheycoords = qcuPrime;
+	console.log("requested: "+input);
+	typesetter(input, acheycoords);
+	console.log("printed: "+input+".");
+}
+
 //print too rude for g*thub
-const coordsA = new Coords(100, 0);
 console.log(coordsA.xpos+","+coordsA.ypos); //you know how it is
 typesetter(".QCU", coordsA);
 
-let qcuPrime = new Coords(50, 64);	//interactive line is drawn from here to end of canvas
 //debug string containing invalid characters
-let input = "i am absolutely ,./<>🤢🤢🤢🤢?STYMIED by the dynamic typing that allowed my early mistake to go unnoticed for such a long period of time";
-console.log("requested: "+input);
-typesetter(input, qcuPrime);
-console.log("printed: "+input+".");
+//let input = "i am absolutely ,./<>🤢🤢🤢🤢?STYMIED by the dynamic typing that allowed my early mistake to go unnoticed for such a long period of time";
+//console.log("requested: "+input);
+//typesetter(input, qcuPrime);
+//console.log("printed: "+input+".");
 }; //end of onload function
