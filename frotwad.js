@@ -86,7 +86,7 @@ contex.drawImage(frame.img, frame.sx, frame.sy, frame.swidth, frame.sheight, coo
 //console.log("drawn at "+coords.xpos+","+coords.ypos+".");
 }
 
-//typesetter is the function we call to draw things,
+//typesetter is the function we call to draw things, raw draw() shouldn't happen outside a function
 function typesetter(string, coords){	//ok so like, why the f*ck does it newline after each word? why? [HISTORIC COMMENT DO NOT REMOVE]
 string = string.toUpperCase();
 inputValidation(string);
@@ -126,9 +126,4 @@ function acheyTea(){
 console.log(coordsA.xpos+","+coordsA.ypos); //you know how it is
 typesetter(".QCU", coordsA);
 
-//debug string containing invalid characters
-//let input = "i am absolutely ,./<>🤢🤢🤢🤢?STYMIED by the dynamic typing that allowed my early mistake to go unnoticed for such a long period of time";
-//console.log("requested: "+input);
-//typesetter(input, qcuPrime);
-//console.log("printed: "+input+".");
-}; //end of onload function
+};
