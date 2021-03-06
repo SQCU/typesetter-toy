@@ -122,7 +122,6 @@ function acheyTea(){
 	console.log("printed: "+input+".");
 }
 
-//print too rude for g*thub
 console.log(coordsA.xpos+","+coordsA.ypos); //you know how it is
 typesetter(".QCU", coordsA);
 
