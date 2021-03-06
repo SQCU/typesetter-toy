@@ -1,5 +1,5 @@
 # typesetter-toy
-# goals
+# goals  
 every project really has to start from a 'hello world'.
 before you can begin adding purposeful lines of code to a project, it's really important to have 
 a body of known conditions where you know:  
