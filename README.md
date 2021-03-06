@@ -6,7 +6,7 @@ a body of known conditions where you know:
 everything important is loading
 you can push debugging information to your console or logfiles
 whatever libraries or APIs you're using behave in the way their documentation claims.
----
+
 for typesetter-toy, our ambitions were aggressively scoped down:
 Produce a html document that displays the same content on phone, chrome, and firefox.
 Produce a canvas object that displays the same effects at runtime on phone, chrome, and firefox.
